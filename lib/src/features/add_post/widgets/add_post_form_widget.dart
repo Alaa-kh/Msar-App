@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:msar/src/core/constants/app_colors.dart';
-import 'package:msar/src/core/widgets/app_button.dart';
 import 'package:msar/src/core/widgets/app_text_field.dart';
+import 'package:msar/src/features/add_post/widgets/add_post_button_widget.dart';
 import 'package:msar/src/features/add_post/widgets/add_post_gender_widget.dart';
 
 class AddPostFormWidget extends StatelessWidget {
@@ -71,7 +71,7 @@ class AddPostFormWidget extends StatelessWidget {
             hint: 'اكتب تفاصيل المنشور هنا...',
           ),
           const SizedBox(height: 15),
-          AppButton(title: 'إضافة', onPressed: () {}),
+          AddPostButtonWidget(),
           const SizedBox(height: 15),
         ],
       ),
