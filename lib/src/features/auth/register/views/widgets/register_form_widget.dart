@@ -37,19 +37,25 @@ class RegisterFormWidget extends StatelessWidget {
         AppTextField(
           hintTextDirection: TextDirection.rtl,
           label: 'الاسم الكامل',
-          prefix: SvgPicture.asset(AppIcons.person, width: 1, height: 1),
+          prefix: Padding(
+            padding: const EdgeInsets.only(right: 12.0, top: 14, bottom: 14),
+            child: SvgPicture.asset(AppIcons.person, width: 1, height: 1),
+          ),
         ).fadeUp(),
 
         AppTextField(
           hintTextDirection: TextDirection.rtl,
           label: 'رقم الهاتف',
-          prefix: SvgPicture.asset(AppIcons.phone, width: 1, height: 1),
+          prefix: Padding(
+            padding: const EdgeInsets.only(right: 12.0, top: 14, bottom: 14),
+            child: SvgPicture.asset(AppIcons.phone, width: 1, height: 1),
+          ),
         ).fadeUp(),
         AppTextField(
           hintTextDirection: TextDirection.rtl,
           label: 'البريد الإلكتروني',
           prefix: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 7.0),
+            padding: const EdgeInsets.only(right: 13.0, top: 15, bottom: 15),
             child: SvgPicture.asset(AppIcons.email, width: 1, height: 1),
           ),
         ).fadeUp(),
@@ -57,7 +63,10 @@ class RegisterFormWidget extends StatelessWidget {
           hintTextDirection: TextDirection.rtl,
           label: 'كلمة المرور',
           obscure: true,
-          prefix: SvgPicture.asset(AppIcons.password, width: 1, height: 1),
+          prefix: Padding(
+            padding: const EdgeInsets.only(right: 12.0, top: 14, bottom: 14),
+            child: SvgPicture.asset(AppIcons.password, width: 1, height: 1),
+          ),
           suffix: IconButton(
             onPressed: () {},
             icon: SvgPicture.asset(AppIcons.eye),

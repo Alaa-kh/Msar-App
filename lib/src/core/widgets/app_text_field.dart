@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:msar/src/core/constants/app_colors.dart';
 
 class AppTextField extends StatefulWidget {
@@ -20,6 +21,7 @@ class AppTextField extends StatefulWidget {
     this.onChanged,
     this.prefix,
     this.fillColor,
+    this.formatter,
   });
 
   final String? label;
@@ -36,6 +38,7 @@ class AppTextField extends StatefulWidget {
   final Color? textColor;
   final Color? hintColor;
   final TextDirection? textDirection;
+  final List<TextInputFormatter>? formatter;
   final TextDirection? hintTextDirection;
   final Function(String)? onChanged;
 
@@ -140,6 +143,7 @@ class _AppTextFieldState extends State<AppTextField> {
         height: isMultiLine ? null : 64,
         margin: const EdgeInsets.symmetric(vertical: 8),
         child: TextField(
+          inputFormatters: widget.formatter ?? [],
           focusNode: _focusNode,
           controller: widget.controller,
           obscureText: widget.obscure,
@@ -171,10 +175,7 @@ class _AppTextFieldState extends State<AppTextField> {
               fontSize: 13,
             ),
             suffixIcon: widget.suffix,
-            prefixIcon: Padding(
-              padding: const EdgeInsets.only(right: 12.0, top: 14, bottom: 14),
-              child: widget.prefix,
-            ),
+            prefixIcon: widget.prefix,
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(8),
               borderSide: BorderSide(color: borderColor, width: .3),

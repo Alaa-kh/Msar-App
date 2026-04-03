@@ -30,7 +30,7 @@ class ForgotPasswordFormWidget extends StatelessWidget {
           hintTextDirection: TextDirection.rtl,
           label: 'البريد الإلكتروني',
           prefix: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 7.0),
+            padding: const EdgeInsets.only(right: 13.0, top: 15, bottom: 15),
             child: SvgPicture.asset(AppIcons.email, width: 1, height: 1),
           ),
         ).fadeUp(),

@@ -9,4 +9,5 @@ class AppIcons {
   static const time = 'assets/icons/time.png';
   static const whatsapp = 'assets/svg/whatsapp.svg';
   static const search = 'assets/svg/search.svg';
+  static const add = 'assets/svg/add.svg';
 }
