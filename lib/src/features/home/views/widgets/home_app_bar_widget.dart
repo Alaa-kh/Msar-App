@@ -31,7 +31,10 @@ class HomeAppBarWidget extends StatelessWidget implements PreferredSizeWidget {
       ).fadeUp(),
       toolbarHeight: 100,
       backgroundColor: AppColors.primary,
-      title: Image.asset(AppImages.logo, width: 117).fadeUp(),
+      title: Padding(
+        padding: const EdgeInsets.only(bottom: 16.0),
+        child: Image.asset(AppImages.logo, width: 117).fadeUp(),
+      ),
       centerTitle: true,
       bottom: PreferredSize(
         preferredSize: const Size.fromHeight(70),

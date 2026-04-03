@@ -9,7 +9,7 @@ class AppColors {
   static const greenLight = Color(0xFFDCFCE7);
   static const grey = Color(0xFF6B7280);
   static const dark = Color(0xFF2D2D2D);
-  static const light = Color(0xFFFAFAFA);
+  static const light = Color(0xFFEAEFEE);
   static const lightGrey = Color(0xFFD9D9D9);
   static const border = Color.fromARGB(255, 224, 224, 224);
 }
