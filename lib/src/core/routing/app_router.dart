@@ -12,7 +12,7 @@ class AppRouter {
 
   late final GoRouter router = GoRouter(
     // navigatorKey: AppOverlay.navigatorKey,
-    initialLocation: '/splash',
+    initialLocation: '/home',
     routes: [
       GoRoute(
         path: '/splash',
