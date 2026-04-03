@@ -42,8 +42,8 @@ class AddPostButtonWidget extends StatelessWidget {
                     Text(
                       'تمت إضافة منشورك بنجاح!',
                       style: TextStyle(
-                        fontSize: 23,
-                        color: AppColors.primary,
+                        fontSize: 20,
+                        color: AppColors.primaryDark,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
