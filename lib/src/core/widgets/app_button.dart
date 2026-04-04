@@ -7,12 +7,14 @@ class AppButton extends StatelessWidget {
   final bool loading;
   final VoidCallback? onPressed;
   final double? height;
+  final Color? backgroundColor;
   const AppButton({
     super.key,
     required this.title,
     required this.onPressed,
     this.loading = false,
     this.height,
+    this.backgroundColor,
   });
 
   @override
@@ -26,7 +28,7 @@ class AppButton extends StatelessWidget {
           style: ElevatedButton.styleFrom(
             backgroundColor: loading
                 ? AppColors.primary.withValues(alpha: .7)
-                : AppColors.primary,
+                : backgroundColor ?? AppColors.primary,
             disabledBackgroundColor: AppColors.primary.withValues(alpha: .7),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(12),

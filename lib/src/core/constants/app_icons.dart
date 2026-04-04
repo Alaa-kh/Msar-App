@@ -11,4 +11,5 @@ class AppIcons {
   static const search = 'assets/svg/search.svg';
   static const add = 'assets/svg/add.svg';
   static const done = 'assets/svg/done.svg';
+  static const logout = 'assets/svg/logout.svg';
 }
