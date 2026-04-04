@@ -24,10 +24,13 @@ class HomeAppBarWidget extends StatelessWidget implements PreferredSizeWidget {
           ),
         ),
       ],
-      leading: const Icon(
-        Icons.settings,
-        color: Colors.white,
-        size: 30,
+      leading: Builder(
+        builder: (context) => IconButton(
+          icon: const Icon(Icons.settings, color: Colors.white, size: 30),
+          onPressed: () {
+            Scaffold.of(context).openDrawer();
+          },
+        ),
       ).fadeUp(),
       toolbarHeight: 100,
       backgroundColor: AppColors.primary,
