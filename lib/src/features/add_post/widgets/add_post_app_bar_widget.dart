@@ -26,7 +26,16 @@ class AddPostAppBarWidget extends StatelessWidget
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 12),
-            child: Icon(Icons.settings, color: Colors.white, size: 28).fadeUp(),
+            child: GestureDetector(
+              onTap: () {
+                Scaffold.of(context).openDrawer();
+              },
+              child: Icon(
+                Icons.settings,
+                color: Colors.white,
+                size: 28,
+              ).fadeUp(),
+            ),
           ),
         ],
         backgroundColor: AppColors.primary,

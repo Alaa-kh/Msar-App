@@ -10,27 +10,23 @@ class AddPostFormWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenHeight = MediaQuery.of(context).size.height;
+
     return Form(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const SizedBox(height: 30),
-          Text(
-            'عنوان المنشور (بالعربية)',
-            style: TextStyle(color: AppColors.primaryDark),
-          ),
+          Text('عنوان المنشور', style: TextStyle(color: AppColors.primaryDark)),
           AppTextField(hint: 'أدخل عنواناً جذاباً...'),
-          const SizedBox(height: 15),
-          Text(
-            'وصف المنشور (بالعربية)',
-            style: TextStyle(color: AppColors.primaryDark),
-          ),
+          const SizedBox(height: 7),
+          Text('وصف المنشور', style: TextStyle(color: AppColors.primaryDark)),
           AppTextField(
             maxLines: 7,
             minLines: 1,
             hint: 'اكتب تفاصيل المنشور هنا...',
           ),
-          const SizedBox(height: 15),
+          const SizedBox(height: 7),
           Text('رقم الواتساب', style: TextStyle(color: AppColors.primaryDark)),
           AppTextField(
             hint: 'أدخل رقم الواتساب هنا...',
@@ -41,36 +37,10 @@ class AddPostFormWidget extends StatelessWidget {
           ),
           const SizedBox(height: 10),
           Text('الجنس المختار', style: TextStyle(color: AppColors.primaryDark)),
-          const SizedBox(height: 15),
+          const SizedBox(height: 7),
           AddPostGenderWidget(),
-          const SizedBox(height: 22),
-          Center(
-            child: Text(
-              'التفاصيل بالانكليزية',
-              style: TextStyle(
-                color: AppColors.grey,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
-
-          const SizedBox(height: 22),
-          Text(
-            'عنوان المنشور (بالانكليزية)',
-            style: TextStyle(color: AppColors.primaryDark),
-          ),
-          AppTextField(hint: 'أدخل عنواناً جذاباً...'),
-          const SizedBox(height: 15),
-          Text(
-            'وصف المنشور (بالانكليزية)',
-            style: TextStyle(color: AppColors.primaryDark),
-          ),
-          AppTextField(
-            maxLines: 7,
-            minLines: 1,
-            hint: 'اكتب تفاصيل المنشور هنا...',
-          ),
-          const SizedBox(height: 15),
+          const SizedBox(height: 10),
+          SizedBox(height: screenHeight * 0.2),
           AddPostButtonWidget(),
           const SizedBox(height: 15),
         ],

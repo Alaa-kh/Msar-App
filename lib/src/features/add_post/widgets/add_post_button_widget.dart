@@ -17,7 +17,7 @@ class AddPostButtonWidget extends StatelessWidget {
           backgroundColor: Colors.white,
           context: context,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.vertical(top: Radius.circular(55)),
+            borderRadius: BorderRadius.vertical(top: Radius.circular(35)),
           ),
           isScrollControlled: true,
           builder: (context) {

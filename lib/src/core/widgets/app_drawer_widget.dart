@@ -80,66 +80,69 @@ Drawer appDrawer(BuildContext context) {
                 ),
               ),
               onTap: () {
-                showModalBottomSheet(
-                  isDismissible: false,
-                  backgroundColor: Colors.white,
-                  context: context,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.vertical(
-                      top: Radius.circular(55),
+                Navigator.of(context).pop();
+                Future.delayed(Duration(milliseconds: 300), () {
+                  showModalBottomSheet(
+                    isDismissible: false,
+                    backgroundColor: Colors.white,
+                    context: context,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.vertical(
+                        top: Radius.circular(35),
+                      ),
                     ),
-                  ),
-                  isScrollControlled: true,
-                  builder: (context) {
-                    return Padding(
-                      padding: EdgeInsets.only(
-                        bottom: MediaQuery.of(context).viewInsets.bottom,
-                      ),
-                      child: Container(
-                        padding: EdgeInsets.all(16),
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Align(
-                              alignment: Alignment.topRight,
-                              child: IconButton(
-                                icon: Icon(Icons.close),
-                                onPressed: () => Navigator.pop(context),
-                              ),
-                            ),
-                            SvgPicture.asset(AppIcons.logout),
-                            SizedBox(height: 27),
-                            Text(
-                              'تسجيل الخروج',
-                              style: TextStyle(
-                                fontSize: 20,
-                                color: AppColors.primaryDark,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            SizedBox(height: 16),
-                            Text(
-                              'هل أنت متأكد من رغبتك في تسجيل الخروج؟',
-                              style: TextStyle(color: AppColors.grey),
-                            ),
-                            SizedBox(height: 16),
-                            AppButton(
-                              title: 'تسجيل الخروج',
-                              onPressed: () {},
-                              backgroundColor: AppColors.red,
-                            ),
-                            SizedBox(height: 15),
-                            Text(
-                              'إلغاء',
-                              style: TextStyle(color: AppColors.grey),
-                            ),
-                            SizedBox(height: 16),
-                          ],
+                    isScrollControlled: true,
+                    builder: (context) {
+                      return Padding(
+                        padding: EdgeInsets.only(
+                          bottom: MediaQuery.of(context).viewInsets.bottom,
                         ),
-                      ),
-                    );
-                  },
-                );
+                        child: Container(
+                          padding: EdgeInsets.all(16),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Align(
+                                alignment: Alignment.topRight,
+                                child: IconButton(
+                                  icon: Icon(Icons.close),
+                                  onPressed: () => Navigator.pop(context),
+                                ),
+                              ),
+                              SvgPicture.asset(AppIcons.logout),
+                              SizedBox(height: 27),
+                              Text(
+                                'تسجيل الخروج',
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  color: AppColors.primaryDark,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              SizedBox(height: 16),
+                              Text(
+                                'هل أنت متأكد من رغبتك في تسجيل الخروج؟',
+                                style: TextStyle(color: AppColors.grey),
+                              ),
+                              SizedBox(height: 16),
+                              AppButton(
+                                title: 'تسجيل الخروج',
+                                onPressed: () {},
+                                backgroundColor: AppColors.red,
+                              ),
+                              SizedBox(height: 15),
+                              Text(
+                                'إلغاء',
+                                style: TextStyle(color: AppColors.grey),
+                              ),
+                              SizedBox(height: 16),
+                            ],
+                          ),
+                        ),
+                      );
+                    },
+                  );
+                });
               },
             ),
           ),
@@ -153,19 +156,15 @@ class DrawerClipper extends CustomClipper<Path> {
   @override
   Path getClip(Size size) {
     Path path = Path();
-
     path.lineTo(0, size.height - 40);
-
     path.quadraticBezierTo(
       size.width / 2,
       size.height,
       size.width,
       size.height - 40,
     );
-
     path.lineTo(size.width, 0);
     path.close();
-
     return path;
   }
 
