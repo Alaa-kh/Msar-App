@@ -1,6 +1,5 @@
 import 'package:go_router/go_router.dart';
 import 'package:msar/src/core/storage/token_storage.dart';
-import 'package:msar/src/features/add_post/add_post_page.dart';
 import 'package:msar/src/features/auth/forgot_password/views/forgot_password_page.dart';
 import 'package:msar/src/features/auth/login/views/login_page.dart';
 import 'package:msar/src/features/auth/register/views/register_page.dart';
@@ -41,11 +40,7 @@ class AppRouter {
         name: 'home',
         pageBuilder: (_, __) => const NoTransitionPage(child: HomePage()),
       ),
-      GoRoute(
-        path: '/add_post',
-        name: 'add_post',
-        pageBuilder: (_, __) => const NoTransitionPage(child: AddPostPage()),
-      ),
+
       //   ],
       //   redirect: (context, state) async {
       //     final user = await UserBox().readUser();

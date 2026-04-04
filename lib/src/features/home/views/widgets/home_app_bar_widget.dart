@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:msar/src/core/animation/motions.dart';
 import 'package:msar/src/core/constants/app_colors.dart';
 import 'package:msar/src/core/constants/app_icons.dart';
@@ -17,10 +16,10 @@ class HomeAppBarWidget extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       actions: [
         GestureDetector(
-          onTap: () => context.push('/add_post'),
+          onTap: (){},
           child: Padding(
             padding: const EdgeInsets.only(left: 20.0),
-            child: SvgPicture.asset(AppIcons.add, width: 30).fadeUp(),
+            child: SvgPicture.asset(AppIcons.search, width: 30).fadeUp(),
           ),
         ),
       ],
