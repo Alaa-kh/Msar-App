@@ -1,5 +1,8 @@
+import 'dart:async';
+
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
-import 'package:msar/src/core/storage/token_storage.dart';
 import 'package:msar/src/features/auth/forgot_password/views/forgot_password_page.dart';
 import 'package:msar/src/features/auth/login/views/login_page.dart';
 import 'package:msar/src/features/auth/register/views/register_page.dart';
@@ -7,79 +10,87 @@ import 'package:msar/src/features/home/views/home_page.dart';
 import 'package:msar/src/features/splash/splash_page.dart';
 
 class AppRouter {
-  AppRouter(this.storage);
-  final TokenStorage storage;
+  AppRouter(this._firebaseAuth);
+
+  final FirebaseAuth _firebaseAuth;
 
   late final GoRouter router = GoRouter(
-    // navigatorKey: AppOverlay.navigatorKey,
-    initialLocation: '/home',
+    initialLocation: '/splash',
+    refreshListenable: GoRouterRefreshStream(
+      _firebaseAuth.authStateChanges(),
+    ),
     routes: [
       GoRoute(
         path: '/splash',
         name: 'splash',
-        pageBuilder: (_, __) => const NoTransitionPage(child: SplashPage()),
+        pageBuilder: (context, state) {
+          return const NoTransitionPage(child: SplashPage());
+        },
       ),
       GoRoute(
         path: '/login',
         name: 'login',
-        pageBuilder: (_, __) => const NoTransitionPage(child: LoginPage()),
+        pageBuilder: (context, state) {
+          return const NoTransitionPage(child: LoginPage());
+        },
       ),
       GoRoute(
         path: '/register',
         name: 'register',
-        pageBuilder: (_, __) => const NoTransitionPage(child: RegisterPage()),
+        pageBuilder: (context, state) {
+          return const NoTransitionPage(child: RegisterPage());
+        },
       ),
       GoRoute(
         path: '/forgot_password',
         name: 'forgot_password',
-        pageBuilder: (_, __) =>
-            const NoTransitionPage(child: ForgotPasswordPage()),
+        pageBuilder: (context, state) {
+          return const NoTransitionPage(child: ForgotPasswordPage());
+        },
       ),
       GoRoute(
         path: '/home',
         name: 'home',
-        pageBuilder: (_, __) => const NoTransitionPage(child: HomePage()),
+        pageBuilder: (context, state) {
+          return const NoTransitionPage(child: HomePage());
+        },
       ),
-
-      //   ],
-      //   redirect: (context, state) async {
-      //     final user = await UserBox().readUser();
-      //     final logged = user != null;
-
-      //     final seenOnboarding = await storage.getOnboardingSeen();
-
-      //     final location = state.matchedLocation;
-
-      //     const publicRoutes = <String>{
-      //       '/onboarding',
-      //       '/login',
-      //       '/register',
-      //       '/register_map',
-      //       '/reset-password',
-      //       '/verify',
-      //       '/verify_account',
-      //       '/new-password',
-      //       '/support',
-      //     };
-
-      //     if (!logged && !seenOnboarding && location != '/onboarding') {
-      //       return '/onboarding';
-      //     }
-
-      //     if (logged &&
-      //         (location == '/login' ||
-      //             location == '/onboarding' ||
-      //             location == '/register')) {
-      //       return '/';
-      //     }
-
-      //     if (!logged && !publicRoutes.contains(location)) {
-      //       return '/login';
-      //     }
-
-      //     return null;
-      //   },
-      // );
     ],
+    redirect: (context, state) {
+      final isLoggedIn = _firebaseAuth.currentUser != null;
+      final path = state.uri.path;
+
+      final isSplash = path == '/splash';
+      final isAuthRoute = path == '/login' ||
+          path == '/register' ||
+          path == '/forgot_password';
+
+      if (isSplash) return null;
+
+      if (!isLoggedIn && !isAuthRoute) {
+        return '/login';
+      }
+
+      if (isLoggedIn && isAuthRoute) {
+        return '/home';
+      }
+
+      return null;
+    },
   );
+}
+
+class GoRouterRefreshStream extends ChangeNotifier {
+  GoRouterRefreshStream(Stream<dynamic> stream) {
+    notifyListeners();
+    _subscription = stream.listen((_) => notifyListeners());
+  }
+
+  late final StreamSubscription<dynamic> _subscription;
+
+  @override
+  void dispose() {
+    _subscription.cancel();
+    super.dispose();
+  }
 }

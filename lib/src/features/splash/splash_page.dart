@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:msar/src/core/constants/app_colors.dart';
@@ -58,7 +59,12 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
   void _goNext() {
     if (_navigated || !mounted) return;
     _navigated = true;
-    context.go('/register');
+    final user = FirebaseAuth.instance.currentUser;
+    if (user != null) {
+      context.go('/home');
+    } else {
+      context.go('/login');
+    }
   }
 
   @override

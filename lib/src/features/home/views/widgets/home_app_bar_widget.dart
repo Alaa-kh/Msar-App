@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:msar/src/core/animation/motions.dart';
 import 'package:msar/src/core/constants/app_colors.dart';
 import 'package:msar/src/core/constants/app_icons.dart';
 import 'package:msar/src/core/constants/app_images.dart';
+import 'package:msar/src/features/opportunities/presentation/cubit/opportunities_cubit.dart';
+import 'package:msar/src/features/opportunities/presentation/widgets/opportunities_search_delegate.dart';
 import 'package:svg_flutter/svg.dart';
 
 class HomeAppBarWidget extends StatelessWidget implements PreferredSizeWidget {
@@ -16,25 +19,32 @@ class HomeAppBarWidget extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       actions: [
         GestureDetector(
-          onTap: (){},
+          onTap: () {
+            final cubit = context.read<OpportunitiesCubit>();
+
+            showSearch(
+              context: context,
+              delegate: OpportunitiesSearchDelegate(cubit),
+            );
+          },
           child: Padding(
-            padding: const EdgeInsets.only(left: 20.0),
+            padding: const EdgeInsets.only(left: 20),
             child: SvgPicture.asset(AppIcons.search, width: 30).fadeUp(),
           ),
         ),
       ],
       leading: Builder(
-        builder: (context) => IconButton(
-          icon: const Icon(Icons.settings, color: Colors.white, size: 30),
-          onPressed: () {
-            Scaffold.of(context).openDrawer();
-          },
-        ),
+        builder: (context) {
+          return IconButton(
+            icon: const Icon(Icons.settings, color: Colors.white, size: 30),
+            onPressed: () => Scaffold.of(context).openDrawer(),
+          );
+        },
       ).fadeUp(),
       toolbarHeight: 100,
       backgroundColor: AppColors.primary,
       title: Padding(
-        padding: const EdgeInsets.only(bottom: 16.0),
+        padding: const EdgeInsets.only(bottom: 16),
         child: Image.asset(AppImages.logo, width: 117).fadeUp(),
       ),
       centerTitle: true,
@@ -57,9 +67,9 @@ class HomeAppBarWidget extends StatelessWidget implements PreferredSizeWidget {
               color: AppColors.secondary,
             ),
             tabs: [
-              Tab(text: "الكل"),
-              Tab(text: "رجال"),
-              Tab(text: "نساء"),
+              Tab(text: 'الكل'),
+              Tab(text: 'رجال'),
+              Tab(text: 'نساء'),
             ],
           ).fadeUp(),
         ),
