@@ -28,6 +28,7 @@ dependencies:
   carousel_slider: ^5.1.2
   smooth_page_indicator: ^2.0.1
   flutter_native_splash: ^2.4.7
+  url_launcher: ^6.3.1
   firebase_core: ^4.6.0
   firebase_auth: ^6.3.0
   cloud_firestore: ^6.2.0
@@ -37,11 +38,28 @@ dev_dependencies:
     sdk: flutter
 
   flutter_lints: ^6.0.0
+  flutter_launcher_icons: ^0.14.3
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
 # The following section is specific to Flutter packages.
+flutter_native_splash:
+  color: "#00897B"
+  image: assets/images/logo.png
+  android_12:
+    image: assets/images/splash_logo_android12.png
+    icon_background_color: "#00897B"
+  web: false
+
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: "assets/images/logo_colors.png"
+  adaptive_icon_background: "#00897B"
+  adaptive_icon_foreground: "assets/images/logo.png"
+  min_sdk_android: 21
+
 flutter:
 
   uses-material-design: true

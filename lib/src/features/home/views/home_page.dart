@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:msar/src/core/constants/app_colors.dart';
 import 'package:msar/src/core/di/service_locator.dart';
 import 'package:msar/src/core/widgets/app_drawer_widget.dart';
+import 'package:msar/src/features/banners/presentation/cubit/banners_cubit.dart';
 import 'package:msar/src/features/home/views/widgets/home_app_bar_widget.dart';
 import 'package:msar/src/features/opportunities/domain/entities/opportunity.dart';
 import 'package:msar/src/features/opportunities/presentation/cubit/opportunities_cubit.dart';
@@ -13,22 +14,29 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (_) => sl<OpportunitiesCubit>()..watchOpportunities(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (_) => sl<OpportunitiesCubit>()..watchOpportunities(),
+        ),
+        BlocProvider(create: (_) => sl<BannersCubit>()..watchBanners()),
+      ],
       child: const DefaultTabController(
         length: 3,
-        child: Scaffold(
-          endDrawerEnableOpenDragGesture: false,
-          drawerBarrierDismissible: false,
-          drawer: AppDrawerWidget(),
-          backgroundColor: AppColors.primaryLight,
-          appBar: HomeAppBarWidget(),
-          body: TabBarView(
-            children: [
-              OpportunitiesTabWidget(audience: OpportunityAudience.all),
-              OpportunitiesTabWidget(audience: OpportunityAudience.men),
-              OpportunitiesTabWidget(audience: OpportunityAudience.women),
-            ],
+        child: SafeArea(
+          child: Scaffold(
+            endDrawerEnableOpenDragGesture: false,
+            drawerBarrierDismissible: false,
+            drawer: AppDrawerWidget(),
+            backgroundColor: AppColors.primaryLight,
+            appBar: HomeAppBarWidget(),
+            body: TabBarView(
+              children: [
+                OpportunitiesTabWidget(audience: OpportunityAudience.all),
+                OpportunitiesTabWidget(audience: OpportunityAudience.men),
+                OpportunitiesTabWidget(audience: OpportunityAudience.women),
+              ],
+            ),
           ),
         ),
       ),

@@ -24,6 +24,7 @@ class _RegisterFormWidgetState extends State<RegisterFormWidget> {
   final TextEditingController _phoneController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  bool _obscurePassword = true;
 
   Future<void> _register() async {
     await context.read<RegisterCubit>().register(
@@ -117,13 +118,13 @@ class _RegisterFormWidgetState extends State<RegisterFormWidget> {
               controller: _passwordController,
               hintTextDirection: TextDirection.rtl,
               label: 'كلمة المرور',
-              obscure: true,
+              obscure: _obscurePassword,
               prefix: Padding(
                 padding: const EdgeInsets.only(right: 12, top: 14, bottom: 14),
                 child: SvgPicture.asset(AppIcons.password, width: 1, height: 1),
               ),
               suffix: IconButton(
-                onPressed: () {},
+                onPressed: () => setState(() => _obscurePassword = !_obscurePassword),
                 icon: SvgPicture.asset(AppIcons.eye),
               ),
             ).fadeUp(),

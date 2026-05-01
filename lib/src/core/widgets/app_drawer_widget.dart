@@ -117,66 +117,66 @@ class AppDrawerWidget extends StatelessWidget {
       backgroundColor: Colors.white,
       context: context,
       shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(
-          top: Radius.circular(35),
-        ),
+        borderRadius: BorderRadius.vertical(top: Radius.circular(35)),
       ),
       isScrollControlled: true,
       builder: (sheetContext) {
-        return Padding(
-          padding: EdgeInsets.only(
-            bottom: MediaQuery.of(sheetContext).viewInsets.bottom,
-          ),
-          child: Container(
-            padding: const EdgeInsets.all(16),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Align(
-                  alignment: Alignment.topRight,
-                  child: IconButton(
-                    icon: const Icon(Icons.close),
-                    onPressed: () => Navigator.pop(sheetContext),
+        return SafeArea(
+          child: Padding(
+            padding: EdgeInsets.only(
+              bottom: MediaQuery.of(sheetContext).viewInsets.bottom,
+            ),
+            child: Container(
+              padding: const EdgeInsets.all(16),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Align(
+                    alignment: Alignment.topRight,
+                    child: IconButton(
+                      icon: const Icon(Icons.close),
+                      onPressed: () => Navigator.pop(sheetContext),
+                    ),
                   ),
-                ),
-                SvgPicture.asset(AppIcons.logout),
-                const SizedBox(height: 27),
-                Text(
-                  'تسجيل الخروج',
-                  style: TextStyle(
-                    fontSize: 20,
-                    color: AppColors.primaryDark,
-                    fontWeight: FontWeight.bold,
+                  SvgPicture.asset(AppIcons.logout),
+                  const SizedBox(height: 27),
+                  Text(
+                    'تسجيل الخروج',
+                    style: TextStyle(
+                      fontSize: 20,
+                      color: AppColors.primaryDark,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
-                ),
-                const SizedBox(height: 16),
-                Text(
-                  'هل أنت متأكد من رغبتك في تسجيل الخروج؟',
-                  style: TextStyle(color: AppColors.grey),
-                ),
-                const SizedBox(height: 16),
-                AppButton(
-                  title: 'تأكيد الخروج',
-                  backgroundColor: AppColors.red,
-                  onPressed: () async {
-                    final router = GoRouter.of(sheetContext);
-                    Navigator.pop(sheetContext);
-
-                    await sl<SignOutUseCase>().call();
-
-                    router.go('/login');
-                  },
-                ),
-                const SizedBox(height: 15),
-                GestureDetector(
-                  onTap: () => Navigator.pop(sheetContext),
-                  child: Text(
-                    'إلغاء',
+                  const SizedBox(height: 16),
+                  Text(
+                    'هل أنت متأكد من رغبتك في تسجيل الخروج؟',
                     style: TextStyle(color: AppColors.grey),
                   ),
-                ),
-                const SizedBox(height: 16),
-              ],
+                  const SizedBox(height: 16),
+                  AppButton(
+                    title: 'تأكيد الخروج',
+                    backgroundColor: AppColors.red,
+                    onPressed: () async {
+                      final router = GoRouter.of(sheetContext);
+                      Navigator.pop(sheetContext);
+
+                      await sl<SignOutUseCase>().call();
+
+                      router.go('/login');
+                    },
+                  ),
+                  const SizedBox(height: 15),
+                  GestureDetector(
+                    onTap: () => Navigator.pop(sheetContext),
+                    child: Text(
+                      'إلغاء',
+                      style: TextStyle(color: AppColors.grey),
+                    ),
+                  ),
+                  const SizedBox(height: 16),
+                ],
+              ),
             ),
           ),
         );
@@ -186,10 +186,7 @@ class AppDrawerWidget extends StatelessWidget {
 }
 
 class _DrawerInfoTile extends StatelessWidget {
-  const _DrawerInfoTile({
-    required this.icon,
-    required this.title,
-  });
+  const _DrawerInfoTile({required this.icon, required this.title});
 
   final IconData icon;
   final String title;

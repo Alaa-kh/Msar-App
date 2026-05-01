@@ -20,6 +20,7 @@ class OpportunitiesCubit extends Cubit<OpportunitiesState> {
     _subscription?.cancel();
     _subscription = _watchOpportunitiesUseCase().listen(
       (opportunities) {
+        if (isClosed) return;
         emit(
           state.copyWith(
             status: OpportunitiesStatus.success,
@@ -29,6 +30,7 @@ class OpportunitiesCubit extends Cubit<OpportunitiesState> {
         );
       },
       onError: (_) {
+        if (isClosed) return;
         emit(
           state.copyWith(
             status: OpportunitiesStatus.failure,

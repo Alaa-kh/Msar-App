@@ -22,6 +22,7 @@ class LoginFormWidget extends StatefulWidget {
 class _LoginFormWidgetState extends State<LoginFormWidget> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  bool _obscurePassword = true;
 
   Future<void> _login() async {
     await context.read<LoginCubit>().login(
@@ -94,13 +95,13 @@ class _LoginFormWidgetState extends State<LoginFormWidget> {
               controller: _passwordController,
               hintTextDirection: TextDirection.rtl,
               label: 'كلمة المرور',
-              obscure: true,
+              obscure: _obscurePassword,
               prefix: Padding(
                 padding: const EdgeInsets.only(right: 12, top: 14, bottom: 14),
                 child: SvgPicture.asset(AppIcons.password, width: 1, height: 1),
               ),
               suffix: IconButton(
-                onPressed: () {},
+                onPressed: () => setState(() => _obscurePassword = !_obscurePassword),
                 icon: SvgPicture.asset(AppIcons.eye),
               ),
             ).fadeUp(),

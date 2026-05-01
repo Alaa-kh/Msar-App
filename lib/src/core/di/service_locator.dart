@@ -12,6 +12,11 @@ import '../../features/auth/domain/usecases/sign_out_usecase.dart';
 import '../../features/auth/presentation/cubit/forgot_password_cubit.dart';
 import '../../features/auth/presentation/cubit/login_cubit.dart';
 import '../../features/auth/presentation/cubit/register_cubit.dart';
+import '../../features/banners/data/datasources/banners_remote_data_source.dart';
+import '../../features/banners/data/repositories/banners_repository_impl.dart';
+import '../../features/banners/domain/repositories/banners_repository.dart';
+import '../../features/banners/domain/usecases/watch_banners_usecase.dart';
+import '../../features/banners/presentation/cubit/banners_cubit.dart';
 import '../../features/opportunities/data/datasources/opportunities_remote_data_source.dart';
 import '../../features/opportunities/data/repositories/opportunities_repository_impl.dart';
 import '../../features/opportunities/domain/repositories/opportunities_repository.dart';
@@ -56,4 +61,15 @@ void setupServiceLocator() {
 
   sl.registerLazySingleton(() => WatchOpportunitiesUseCase(sl()));
   sl.registerFactory(() => OpportunitiesCubit(sl()));
+
+  sl.registerLazySingleton<BannersRemoteDataSource>(
+    () => BannersRemoteDataSourceImpl(sl()),
+  );
+
+  sl.registerLazySingleton<BannersRepository>(
+    () => BannersRepositoryImpl(sl()),
+  );
+
+  sl.registerLazySingleton(() => WatchBannersUseCase(sl()));
+  sl.registerFactory(() => BannersCubit(sl()));
 }

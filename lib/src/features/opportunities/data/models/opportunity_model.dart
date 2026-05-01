@@ -13,6 +13,7 @@ class OpportunityModel extends Opportunity {
     required super.audience,
     required super.isActive,
     required super.createdAt,
+    super.whatsapp,
   });
 
   factory OpportunityModel.fromFirestore(
@@ -30,6 +31,7 @@ class OpportunityModel extends Opportunity {
       audience: _mapAudience(data['audience'] as String?),
       isActive: data['isActive'] as bool? ?? false,
       createdAt: _mapDate(data['createdAt']),
+      whatsapp: data['whatsapp'] as String? ?? '',
     );
   }
 

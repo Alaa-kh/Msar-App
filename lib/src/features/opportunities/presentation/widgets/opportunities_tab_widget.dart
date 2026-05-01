@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:msar/src/features/home/views/widgets/home_carousel_widget.dart';
 import 'package:msar/src/features/opportunities/domain/entities/opportunity.dart';
 import 'package:msar/src/features/opportunities/presentation/cubit/opportunities_cubit.dart';
 import 'package:msar/src/features/opportunities/presentation/cubit/opportunities_state.dart';
@@ -24,36 +25,39 @@ class OpportunitiesTabWidget extends StatelessWidget {
 
         if (state.status == OpportunitiesStatus.failure) {
           return Center(
-            child: Text(
-              state.message,
-              textAlign: TextAlign.center,
-            ),
+            child: Text(state.message, textAlign: TextAlign.center),
           );
         }
 
         final opportunities = state.filterByAudience(audience);
+        final showBanner = audience == OpportunityAudience.all;
 
-        if (opportunities.isEmpty) {
-          return const Center(
-            child: Text('لا توجد فرص متاحة حالياً.'),
-          );
+        if (opportunities.isEmpty && !showBanner) {
+          return const Center(child: Text('لا توجد فرص متاحة حالياً.'));
         }
 
         return CustomScrollView(
           slivers: [
             const SliverToBoxAdapter(child: SizedBox(height: 14)),
-            SliverPadding(
-              padding: const EdgeInsets.all(20),
-              sliver: SliverList.separated(
-                itemCount: opportunities.length,
-                separatorBuilder: (_, __) => const SizedBox(height: 14),
-                itemBuilder: (context, index) {
-                  return OpportunityCardWidget(
-                    opportunity: opportunities[index],
-                  );
-                },
+            if (showBanner)
+              const SliverToBoxAdapter(child: HomeCarouselWidget()),
+            if (opportunities.isEmpty)
+              const SliverFillRemaining(
+                child: Center(child: Text('لا توجد فرص متاحة حالياً.')),
+              )
+            else
+              SliverPadding(
+                padding: const EdgeInsets.all(20),
+                sliver: SliverList.separated(
+                  itemCount: opportunities.length,
+                  separatorBuilder: (_, _) => const SizedBox(height: 14),
+                  itemBuilder: (context, index) {
+                    return OpportunityCardWidget(
+                      opportunity: opportunities[index],
+                    );
+                  },
+                ),
               ),
-            ),
           ],
         );
       },

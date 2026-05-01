@@ -15,6 +15,7 @@ class Opportunity {
     required this.audience,
     required this.isActive,
     required this.createdAt,
+    this.whatsapp = '',
   });
 
   final String id;
@@ -26,4 +27,5 @@ class Opportunity {
   final OpportunityAudience audience;
   final bool isActive;
   final DateTime createdAt;
+  final String whatsapp;
 }
