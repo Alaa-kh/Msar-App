@@ -21,7 +21,6 @@ class HomeAppBarWidget extends StatelessWidget implements PreferredSizeWidget {
         GestureDetector(
           onTap: () {
             final cubit = context.read<OpportunitiesCubit>();
-
             showSearch(
               context: context,
               delegate: OpportunitiesSearchDelegate(cubit),
