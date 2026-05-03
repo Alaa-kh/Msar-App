@@ -5,6 +5,7 @@ import 'package:msar/src/core/animation/motions.dart';
 import 'package:msar/src/core/constants/app_colors.dart';
 import 'package:msar/src/core/constants/app_icons.dart';
 import 'package:msar/src/core/constants/app_images.dart';
+import 'package:msar/src/core/constants/app_snack_bar.dart';
 import 'package:msar/src/core/widgets/app_button.dart';
 import 'package:msar/src/core/widgets/app_text_field.dart';
 import 'package:msar/src/features/auth/presentation/cubit/forgot_password_cubit.dart';
@@ -28,11 +29,6 @@ class _ForgotPasswordFormWidgetState extends State<ForgotPasswordFormWidget> {
         );
   }
 
-  void _showMessage(String message) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text(message)),
-    );
-  }
 
   @override
   void dispose() {
@@ -47,7 +43,7 @@ class _ForgotPasswordFormWidgetState extends State<ForgotPasswordFormWidget> {
     return BlocConsumer<ForgotPasswordCubit, ForgotPasswordState>(
       listener: (context, state) {
         if (state is ForgotPasswordSuccess) {
-          _showMessage(state.message);
+             AppSnackBar.success(context, state.message);
 
           Future.delayed(const Duration(milliseconds: 700), () {
             if (context.mounted) {
@@ -57,7 +53,7 @@ class _ForgotPasswordFormWidgetState extends State<ForgotPasswordFormWidget> {
         }
 
         if (state is ForgotPasswordFailure) {
-          _showMessage(state.message);
+             AppSnackBar.error(context, state.message);
         }
       },
       builder: (context, state) {

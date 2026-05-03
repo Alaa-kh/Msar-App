@@ -16,11 +16,15 @@ class LoginCubit extends Cubit<LoginState> {
     final trimmedEmail = email.trim();
 
     if (trimmedEmail.isEmpty || password.isEmpty) {
-      emit(const LoginFailure('الرجاء إدخال البريد الإلكتروني وكلمة المرور.'));
+      if (!isClosed) {
+        emit(const LoginFailure('الرجاء إدخال البريد الإلكتروني وكلمة المرور.'));
+      }
       return;
     }
 
-    emit(const LoginLoading());
+    if (!isClosed) {
+      emit(const LoginLoading());
+    }
 
     try {
       await _loginUseCase(
@@ -28,11 +32,17 @@ class LoginCubit extends Cubit<LoginState> {
         password: password,
       );
 
-      emit(const LoginSuccess());
+      if (!isClosed) {
+        emit(const LoginSuccess());
+      }
     } on FirebaseAuthException catch (error) {
-      emit(LoginFailure(_mapFirebaseError(error)));
+      if (!isClosed) {
+        emit(LoginFailure(_mapFirebaseError(error)));
+      }
     } catch (_) {
-      emit(const LoginFailure('حدث خطأ أثناء تسجيل الدخول، حاول مرة أخرى.'));
+      if (!isClosed) {
+        emit(const LoginFailure('حدث خطأ أثناء تسجيل الدخول، حاول مرة أخرى.'));
+      }
     }
   }
 

@@ -5,6 +5,7 @@ import 'package:msar/src/core/animation/motions.dart';
 import 'package:msar/src/core/constants/app_colors.dart';
 import 'package:msar/src/core/constants/app_icons.dart';
 import 'package:msar/src/core/constants/app_images.dart';
+import 'package:msar/src/core/constants/app_snack_bar.dart';
 import 'package:msar/src/core/widgets/app_button.dart';
 import 'package:msar/src/core/widgets/app_text_field.dart';
 import 'package:msar/src/features/auth/presentation/cubit/register_cubit.dart';
@@ -28,16 +29,10 @@ class _RegisterFormWidgetState extends State<RegisterFormWidget> {
 
   Future<void> _register() async {
     await context.read<RegisterCubit>().register(
-          name: _nameController.text,
-          phone: _phoneController.text,
-          email: _emailController.text,
-          password: _passwordController.text,
-        );
-  }
-
-  void _showMessage(String message) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text(message)),
+      name: _nameController.text,
+      phone: _phoneController.text,
+      email: _emailController.text,
+      password: _passwordController.text,
     );
   }
 
@@ -59,7 +54,7 @@ class _RegisterFormWidgetState extends State<RegisterFormWidget> {
         }
 
         if (state is RegisterFailure) {
-          _showMessage(state.message);
+          AppSnackBar.error(context, state.message);
         }
       },
       builder: (context, state) {
@@ -124,7 +119,8 @@ class _RegisterFormWidgetState extends State<RegisterFormWidget> {
                 child: SvgPicture.asset(AppIcons.password, width: 1, height: 1),
               ),
               suffix: IconButton(
-                onPressed: () => setState(() => _obscurePassword = !_obscurePassword),
+                onPressed: () =>
+                    setState(() => _obscurePassword = !_obscurePassword),
                 icon: SvgPicture.asset(AppIcons.eye),
               ),
             ).fadeUp(),
